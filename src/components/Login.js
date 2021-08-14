@@ -79,11 +79,11 @@ class Login extends Component {
                                         <form className="login" onSubmit={this.login}>
                                             <div className="group">
                                                 <label htmlFor="loginEmail" className="label">E-mail</label>
-                                                <input name="loginEmail" id="loginEmail" type="email" value={loginEmail} className="input" placeholder="Enter your E-mail" onChange={this.handleOnChange} />
+                                                <input name="loginEmail" id="loginEmail" type="email" value={loginEmail} className="input" placeholder="Enter your E-mail" onChange={this.handleOnChange} required />
                                             </div>
                                             <div className="group">
                                                 <label htmlFor="loginPass" className="label">Password</label>
-                                                <input name="loginPass" id="loginPass" type="password" value={loginPass} className="input" data-type="password" placeholder="Enter your password" onChange={this.handleOnChange} />
+                                                <input name="loginPass" id="loginPass" type="password" value={loginPass} className="input" data-type="password" placeholder="Enter your password" onChange={this.handleOnChange} required />
                                             </div>
                                             <div className="group">
                                                 <input type="submit" className="button" value="Sign In" />
@@ -93,11 +93,11 @@ class Login extends Component {
                                         <form className="sign-up-form" onSubmit={this.signup}>
                                             <div className="group">
                                                 <label htmlFor="signupEmail" className="label">Email Address</label>
-                                                <input name="signupEmail" id="signupEmail" type="email" value={signupEmail} className="input" placeholder="Enter your email address" onChange={this.handleOnChange} />
+                                                <input name="signupEmail" id="signupEmail" type="email" value={signupEmail} className="input" placeholder="Enter your email address" onChange={this.handleOnChange} required />
                                             </div>
                                             <div className="group">
                                                 <label htmlFor="signupPass" className="label">Password</label>
-                                                <input name="signupPass" id="signupPass" type="password" value={signupPass} className="input" data-type="password" placeholder="Create your password" onChange={this.handleOnChange} />
+                                                <input name="signupPass" id="signupPass" type="password" value={signupPass} className="input" data-type="password" placeholder="Create your password" onChange={this.handleOnChange} required />
                                             </div>
                                             <div className="group">
                                                 <input type="submit" className="button" value="Sign Up" />

@@ -36,13 +36,10 @@ export function handleSetAuthedUser () {
 
 export function handleSignIn (email,password) {
     return async (dispatch) => {
-        dispatch(showLoading())
         try {
             const userCredential = await signIn(email, password);
-            dispatch(hideLoading())
             return dispatch(setAuthedUser(userCredential.user));
         } catch (error) {
-            dispatch(hideLoading())
             return dispatch(setAuthedUser(null, error));
         }
         
