@@ -11,6 +11,14 @@ class EditModal extends Component {
         errMessage: ""
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.todo !== prevProps.todo)
+        this.setState({
+            title: this.props.todo.title,
+            description: this.props.todo.description
+        })
+    }
+
     handleOnChange = e => {
         this.setState({
             [e.target.name]: e.target.value,
@@ -60,10 +68,10 @@ class EditModal extends Component {
                     <Modal.Body>
                         <label className="form-label">Edit "{this.props.todo.title}"</label>
                             <div className="mb-1">
-                                <input type="text" name="title" className="form-control" defaultValue={this.props.todo.title}  onChange={this.handleOnChange} required />
+                                <input type="text" name="title" className="form-control" value={this.state.title} onChange={this.handleOnChange} required />
                             </div>
                             <div className="mb-3">
-                                <input type="text" name="description" className="form-control" defaultValue={this.props.todo.description}  onChange={this.handleOnChange} required />
+                                <input type="text" name="description" className="form-control" value={this.state.description} onChange={this.handleOnChange} required />
                             </div>
                             <div className="alert alert-danger text-center m-4" role="alert" style={error ? {display: "block"} : {display: "none"}}>
                                 {errMessage}
