@@ -46,7 +46,7 @@ class DeleteModal extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="p-3 px-4 mt-3">
-                    <h3>Are you sure to delete "{this.props.todo.todo}"</h3>
+                    <h3>Are you sure to delete "{this.props.todo.title}"</h3>
                     <div className="alert alert-danger text-center m-4" role="alert" style={this.state.error ? {display: "block"} : {display: "none"}}>
                         {this.state.errMessage}
                     </div>

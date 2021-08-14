@@ -10,7 +10,9 @@ export default function todos (state = [], action) {
                 if (action.todo===null) {
                     return state;
                 } else {
-                    state.find(td => td.id === action.todo.id).todo = action.todo.todo;
+                    let item = state.find(td => td.id === action.todo.id)
+                    item.title = action.todo.title;
+                    item.description = action.todo.description;
                     return state;
                 }
             case DELETE_TODO :

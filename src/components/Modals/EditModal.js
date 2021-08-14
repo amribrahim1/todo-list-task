@@ -5,7 +5,8 @@ import { handleSubmitEditTodo } from "../../store/actionCreators/todos";
 
 class EditModal extends Component {
     state = {
-        todo: "",
+        title: "",
+        description: "",
         error: false,
         errMessage: ""
     }
@@ -25,7 +26,7 @@ class EditModal extends Component {
             error: false
         });
 
-        this.props.dispatch(handleSubmitEditTodo(this.props.todo.id,this.state.todo))
+        this.props.dispatch(handleSubmitEditTodo(this.props.todo.id,this.state.title, this.state.description))
         .then(result => {
             if (result.error === null) {
                 this.props.closeEditModal()
@@ -57,10 +58,12 @@ class EditModal extends Component {
                 </Modal.Header>
                 <form onSubmit={this.editTodo}>
                     <Modal.Body>
-                        
+                        <label className="form-label">Edit "{this.props.todo.title}"</label>
+                            <div className="mb-1">
+                                <input type="text" name="title" className="form-control" defaultValue={this.props.todo.title}  onChange={this.handleOnChange} required />
+                            </div>
                             <div className="mb-3">
-                                <label htmlFor="todo" className="form-label">Add todo item</label>
-                                <input type="text" name="todo" className="form-control" id="todo" defaultValue={this.props.todo.todo}  onChange={this.handleOnChange} required />
+                                <input type="text" name="description" className="form-control" defaultValue={this.props.todo.description}  onChange={this.handleOnChange} required />
                             </div>
                             <div className="alert alert-danger text-center m-4" role="alert" style={error ? {display: "block"} : {display: "none"}}>
                                 {errMessage}

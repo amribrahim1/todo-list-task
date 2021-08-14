@@ -37,11 +37,11 @@ function submitNewTodo (todo, error=null) {
     }
 }
 
-export function handleSubmitNewTodo(todo) {
+export function handleSubmitNewTodo(title, description) {
     return (dispatch) => {
-        return addTodo(todo)
+        return addTodo(title, description)
         .then(doc => {
-            let td = {id: doc.id, todo}
+            let td = {id: doc.id, title, description}
             return dispatch(submitNewTodo(td))
         })
         .catch((error) => {
@@ -58,11 +58,11 @@ function submitEditTodo (todo, error=null) {
     }
 }
 
-export function handleSubmitEditTodo(id, todo) {
+export function handleSubmitEditTodo(id, title, description) {
     return (dispatch) => {
-        return editTodo(id,todo)
+        return editTodo(id, title, description)
         .then(() => {
-            return dispatch(submitEditTodo({id, todo}))
+            return dispatch(submitEditTodo({id, title, description}))
         })
         .catch((error) => {
             return dispatch(submitEditTodo(null, error))

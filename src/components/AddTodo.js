@@ -4,7 +4,8 @@ import { handleSubmitNewTodo } from "../store/actionCreators/todos";
 
 class AddTodo extends Component {
     state = {
-        todo: "",
+        title: "",
+        description: "",
         error: false,
         errMessage: ""
     }
@@ -23,7 +24,7 @@ class AddTodo extends Component {
             errMessage: "",
             error: false
         })
-        this.props.dispatch(handleSubmitNewTodo(this.state.todo))
+        this.props.dispatch(handleSubmitNewTodo(this.state.title, this.state.description))
         .then(result => {
             if (result.error === null) {
                 this.setState({todo: ""})
@@ -37,12 +38,15 @@ class AddTodo extends Component {
     }
     
     render() {
-        const { todo, error, errMessage } = this.state;
+        const { title, description, error, errMessage } = this.state;
         return (
             <form onSubmit={this.addTodo}>
+                <label className="form-label">Add todo item</label>
+                <div className="mb-1">
+                    <input type="text" name="title" className="form-control" value={title} onChange={this.handleOnChange} placeholder="Title" required />
+                </div>
                 <div className="mb-3">
-                    <label htmlFor="todo" className="form-label">Add todo item</label>
-                    <input type="text" name="todo" className="form-control" id="todo" value={todo} onChange={this.handleOnChange} required />
+                    <input type="text" name="description" className="form-control" value={description} onChange={this.handleOnChange} placeholder="Description" required />
                 </div>
                 <button type="submit" className="btn btn-primary">Add</button>
                 <div className="alert alert-danger text-center m-4" role="alert" style={error ? {display: "block"} : {display: "none"}}>

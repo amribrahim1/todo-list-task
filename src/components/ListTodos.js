@@ -63,7 +63,10 @@ class ListTodos extends Component {
             <ul className="list-group m-4 text-start">
                 {this.props.todos && this.props.todos.map(td => 
                     <li key={td.id} className="list-group-item d-flex align-items-center justify-content-between">
-                        <p className="mb-0">{td.todo}</p>
+                        <p className="mb-0">
+                            {td.title} <br/>
+                            <span style={{fontSize: "0.8rem", color: "gray"}}>{td.description}</span>
+                        </p>
                         <div className="">
                             <button type="button" className="btn btn-info mx-2" onClick={() => this.openEditModal(td)}>Edit</button>
                             <button type="button" className="btn btn-danger mx-2" onClick={() => this.openDeleteModal(td)}>Delete</button>

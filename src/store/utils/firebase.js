@@ -38,19 +38,21 @@ export function getTodos() {
     return db.collection("todos").where("user","==",  user.uid).orderBy('timestamp', 'asc').get()
 }
 
-export function addTodo(todo) {
+export function addTodo(title, description) {
     const user = firebase.auth().currentUser
     return db.collection("todos").add({      
         user: user.uid,
-        todo,
+        title,
+        description,
         done: false,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
 }
 
-export function editTodo(id, todo) {
+export function editTodo(id, title, description) {
     return db.collection("todos").doc(id).update({ 
-        todo,
+        title,
+        description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
 }
