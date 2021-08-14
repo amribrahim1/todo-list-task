@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import LoadingBar from 'react-redux-loading-bar';
+import configureStore from './store';
+import Routes from './Routes';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
+// Configure redux store
+const { store } = configureStore();
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Provider store={store}>
+			<LoadingBar />
+			<Routes />
+		</Provider>
+	);
 }
 
 export default App;
