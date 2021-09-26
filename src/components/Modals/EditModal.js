@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
-import { handleSubmitEditTodo } from "../../store/actionCreators/todos";
+import { handleSubmitEditTodo } from "../../store";
 
 class EditModal extends Component {
     state = {

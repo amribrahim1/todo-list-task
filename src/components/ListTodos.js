@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from 'react-redux';
 import EditModal from "./Modals/EditModal";
 import DeleteModal from "./Modals/DeleteModal";
-import { handleGetTodos } from "../store/actionCreators/todos";
+import { handleGetTodos } from "../store";
 
 class ListTodos extends Component {
     state = {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { handleSubmitNewTodo } from "../store/actionCreators/todos";
+import { handleSubmitNewTodo } from "../store";
 
 class AddTodo extends Component {
     state = {

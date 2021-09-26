@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
-import { handleSubmitDeleteTodo } from "../../store/actionCreators/todos";
+import { handleSubmitDeleteTodo } from "../../store";
 
 class DeleteModal extends Component {
     state = {
