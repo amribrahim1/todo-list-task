@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 
-import { handleSignIn, handleNewUser } from '../store/actionCreators/authedUser';
+import { handleSignIn, handleNewUser } from '../store';
 
 class Login extends Component {
     state = {

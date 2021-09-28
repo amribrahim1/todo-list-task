@@ -1,4 +1,8 @@
-const logger = (store) => (next) => (action) => {
+import { Store } from 'redux'
+import { AppDispatch } from '../index';
+import { AuthedUserAction, TodoAction } from "../actions";
+
+const logger:any = (store: Store) => (next:AppDispatch) => (action: AuthedUserAction|TodoAction) => {
     console.group(action.type)
         console.log('The action: ', action)
         const returnValue = next(action)

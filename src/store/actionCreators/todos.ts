@@ -1,6 +1,6 @@
+import { Dispatch } from 'redux';
 import { ActionType } from "../action-types";
 import { getTodos, addTodo, editTodo, deleteTodo } from "../utils/firebase";
-import { Dispatch } from 'redux';
 import { TodoAction } from "../actions";
 
 type Todo = {
@@ -9,13 +9,13 @@ type Todo = {
     description: string;
 };
 
-function getAllTodos (todos:Todo[] | null, error=null) {
-    return {
-        type: ActionType.GET_TODOS,
-        todos,
-        error
-    }
-}
+// function getAllTodos (todos:Todo[] | null, error=null) {
+//     return {
+//         type: ActionType.GET_TODOS,
+//         todos,
+//         error
+//     }
+// }
 
 export function handleGetTodos() {
     return (dispatch: Dispatch<TodoAction>) => {
@@ -48,63 +48,87 @@ export function handleGetTodos() {
     }
 }
 
-function submitNewTodo (todo: Todo | null, error=null) {
-    return {
-        type: ActionType.ADD_TODO,
-        todo,
-        error
-    }
-}
+// function submitNewTodo (todo: Todo | null, error=null) {
+//     return {
+//         type: ActionType.ADD_TODO,
+//         todo,
+//         error
+//     }
+// }
 
 export function handleSubmitNewTodo(title: string, description: string) {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<TodoAction>) => {
         return addTodo(title, description)
         .then(doc => {
             let td = {id: doc.id, title, description}
-            return dispatch(submitNewTodo(td))
+            return dispatch({
+                type: ActionType.ADD_TODO,
+                todo: td,
+                error: null
+            })
         })
         .catch((error) => {
-            return dispatch(submitNewTodo(null, error))
+            return dispatch({
+                type: ActionType.ADD_TODO,
+                todo: null,
+                error
+            })
         });
     }
 }
 
-function submitEditTodo (todo: Todo | null, error=null) {
-    return {
-        type: ActionType.EDIT_TODO,
-        todo,
-        error
-    }
-}
+// function submitEditTodo (todo: Todo | null, error=null) {
+//     return {
+//         type: ActionType.EDIT_TODO,
+//         todo,
+//         error
+//     }
+// }
 
 export function handleSubmitEditTodo(id: string, title: string, description: string) {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<TodoAction>) => {
         return editTodo(id, title, description)
         .then(() => {
-            return dispatch(submitEditTodo({id, title, description}))
+            return dispatch({
+                type: ActionType.EDIT_TODO,
+                todo: {id, title, description},
+                error: null
+            })
         })
         .catch((error) => {
-            return dispatch(submitEditTodo(null, error))
+            return dispatch({
+                type: ActionType.EDIT_TODO,
+                todo: null,
+                error
+            })
         });
     }
 }
 
-function submitDeleteTodo (id: string | null, error=null) {
-    return {
-        type: ActionType.DELETE_TODO,
-        id,
-        error
-    }
-}
+// function submitDeleteTodo (id: string | null, error=null) {
+//     return {
+//         type: ActionType.DELETE_TODO,
+//         id,
+//         error
+//     }
+// }
 
 export function handleSubmitDeleteTodo(id:string) {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<TodoAction>) => {
         return deleteTodo(id)
         .then(() => {
-            return dispatch(submitDeleteTodo(id))
+            return dispatch({
+                type: ActionType.DELETE_TODO,
+                id,
+                error: null
+            })
         })
         .catch((error) => {
-            return dispatch(submitDeleteTodo(null, error))
+            return dispatch({
+                type: ActionType.DELETE_TODO,
+                id: null,
+                error
+            })
         });
     }
 }

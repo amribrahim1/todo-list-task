@@ -21,11 +21,11 @@ db.settings({
     merge: true
 })
 
-export function signIn (email,password) {
+export function signIn (email: string,password: string) {
     return firebase.auth().signInWithEmailAndPassword(email, password)
 }  
 
-export function signUp (email,password) {
+export function signUp (email: string,password: string) {
     return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 
@@ -34,14 +34,14 @@ export function logout() {
 }
 
 export function getTodos() {
-    const user = firebase.auth().currentUser
-    return db.collection("todos").where("user","==",  user.uid).orderBy('timestamp', 'asc').get()
+    const user: firebase.User | null = firebase.auth().currentUser
+    return db.collection("todos").where("user","==",  user?.uid).orderBy('timestamp', 'asc').get()
 }
 
-export function addTodo(title, description) {
+export function addTodo(title: string, description: string) {
     const user = firebase.auth().currentUser
     return db.collection("todos").add({      
-        user: user.uid,
+        user: user?.uid,
         title,
         description,
         done: false,
@@ -49,7 +49,7 @@ export function addTodo(title, description) {
     })
 }
 
-export function editTodo(id, title, description) {
+export function editTodo(id: string, title: string, description: string) {
     return db.collection("todos").doc(id).update({ 
         title,
         description,
@@ -57,6 +57,8 @@ export function editTodo(id, title, description) {
     })
 }
 
-export function deleteTodo(id) {
+export function deleteTodo(id:string) {
     return db.collection("todos").doc(id).delete();
 }
+
+export const auth = () => firebase.auth();

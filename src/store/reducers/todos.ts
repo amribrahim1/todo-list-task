@@ -12,7 +12,7 @@ export default function todos (state : { id: string, title: string, description:
                 return state;
             } else {
                 const todos = [...state];
-                const itemIndex = state.findIndex(it => it.id === action.todo.id);
+                const itemIndex = state.findIndex(it => it.id === action.todo?.id);
                 todos[itemIndex] = {
                     id: action.todo.id,
                     title: action.todo.title,

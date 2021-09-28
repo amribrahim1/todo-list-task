@@ -1,7 +1,7 @@
 import React , { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { handleSetAuthedUser } from './store/actionCreators/authedUser';
+import { handleSetAuthedUser } from './store';
 
 import Login from './components/Login';
 import Home from './components/Home';
@@ -11,9 +11,7 @@ function Routes(props) {
         props.dispatch(handleSetAuthedUser())
     }, []);
     
-    if (!props.loadingBar || !Object.keys(props.loadingBar).length || props.loadingBar.default) {
-        return <div>Loading</div>
-    } else {
+    
         return (
                 <Router>
                     <Switch>
@@ -33,7 +31,7 @@ function Routes(props) {
                     </Switch>
                 </Router>
         )
-    }
+    
 }
 
 function mapStateToProps ({ authedUser, loadingBar }) {

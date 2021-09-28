@@ -8,20 +8,30 @@ interface GetTodos {
 
 interface AddTodo {
     type: ActionType.ADD_TODO,
-    todo: { id: string, title: string, description: string },
+    todo: { id: string, title: string, description: string } | null,
     error: any
 }
 
 interface EditTodo {
     type: ActionType.EDIT_TODO,
-    todo: { id: string, title: string, description: string },
+    todo: { id: string, title: string, description: string } | null,
     error: any
 }
 
 interface DeleteTodo {
     type: ActionType.DELETE_TODO,
-    id: string,
+    id: string | null,
     error: any
 }
 
+interface AuthUser {
+    type: ActionType.SET_AUTHED_USER,
+    user: { uid: string | undefined, email: string | null | undefined, displayName: string | null | undefined } | null,
+    error: any
+}
+interface ShowLoading {
+    scope?: string | undefined
+}
+
 export type TodoAction = GetTodos | AddTodo | DeleteTodo | EditTodo
+export type AuthedUserAction = AuthUser

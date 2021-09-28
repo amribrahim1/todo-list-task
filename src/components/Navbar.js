@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { handleLogout } from '../store/actionCreators/authedUser';
+import { handleLogout } from '../store';
 
 function Navbar(props) {
     const signOut = () => props.dispatch(handleLogout());
