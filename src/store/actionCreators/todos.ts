@@ -105,23 +105,25 @@ export function handleSubmitEditTodo(id: string, title: string, description: str
     }
 }
 
-// function submitDeleteTodo (id: string | null, error=null) {
-//     return {
-//         type: ActionType.DELETE_TODO,
-//         id,
-//         error
-//     }
-// }
+type DeleteTodoParams = {
+    type: ActionType.DELETE_TODO;
+    id: string;
+    error: any;
+}
+
+function submitDeleteTodo (id: string, error=null): DeleteTodoParams {
+    return {
+        type: ActionType.DELETE_TODO,
+        id,
+        error
+    }
+}
 
 export function handleSubmitDeleteTodo(id:string) {
     return (dispatch: Dispatch<TodoAction>) => {
         return deleteTodo(id)
         .then(() => {
-            return dispatch({
-                type: ActionType.DELETE_TODO,
-                id,
-                error: null
-            })
+            return dispatch(submitDeleteTodo(id))
         })
         .catch((error) => {
             return dispatch({

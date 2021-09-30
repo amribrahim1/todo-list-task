@@ -1,9 +1,23 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { handleSubmitDeleteTodo } from "../../store";
+import { Todo } from '../../models';
 
-class DeleteModal extends Component {
+interface DeleteModalProps extends PropsFromRedux {
+    // dispatch: (handleSubmitDeleteTodo: SubmitDeleteTodo) => Promise<DeleteTodoParams>;
+    // handleSubmitDeleteTodo: (id: string) => void;
+    show: boolean;
+    closeDeleteModal: () => void;
+    todo: Todo;
+}
+
+interface DeleteModalState {
+    error: boolean;
+    errMessage: string;
+}
+
+class DeleteModal extends Component<DeleteModalProps, DeleteModalState> {
     state = {
         error: false,
         errMessage: ""
@@ -15,7 +29,7 @@ class DeleteModal extends Component {
             error: false
         })
 
-        this.props.dispatch(handleSubmitDeleteTodo(this.props.todo.id))
+        this.props.handleSubmitDeleteTodo(this.props.todo.id)
         .then(result => {
             if (result.error === null) {
                 this.props.closeDeleteModal()
@@ -32,7 +46,6 @@ class DeleteModal extends Component {
         // console.log(this.props)
         return (
             <Modal
-                {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -64,4 +77,10 @@ class DeleteModal extends Component {
     }
 }
 
-export default connect()(DeleteModal);
+// export default connect()(DeleteModal);
+
+const connector = connect(null, { handleSubmitDeleteTodo });
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default connector(DeleteModal)
