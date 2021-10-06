@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import AddTodo from "./AddTodo";
 import ListTodos from "./ListTodos";
 
-function Home() {
+const Home:React.FC = () => {
     return (
         <>
         <Navbar />

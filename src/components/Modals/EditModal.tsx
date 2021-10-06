@@ -1,9 +1,23 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { handleSubmitEditTodo } from "../../store";
+import { Todo } from '../../models';
 
-class EditModal extends Component {
+interface EditModalProps extends PropsFromRedux {
+    show: boolean;
+    closeEditModal: () => void;
+    todo: Todo;
+}
+
+interface EditModalState {
+    title: string;
+    description: string;
+    error: boolean;
+    errMessage: string;
+}
+
+class EditModal extends Component<EditModalProps, EditModalState> {
     state = {
         title: "",
         description: "",
@@ -11,7 +25,7 @@ class EditModal extends Component {
         errMessage: ""
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps:EditModalProps) {
         if (this.props.todo !== prevProps.todo)
         this.setState({
             title: this.props.todo.title,
@@ -19,22 +33,22 @@ class EditModal extends Component {
         })
     }
 
-    handleOnChange = e => {
+    handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             [e.target.name]: e.target.value,
             errMessage: "",
             error: false
-        })
+        } as Pick<EditModalState, keyof EditModalState>)
     }
 
-    editTodo = e => {
+    editTodo = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         this.setState({
             errMessage: "",
             error: false
         });
 
-        this.props.dispatch(handleSubmitEditTodo(this.props.todo.id,this.state.title, this.state.description))
+        this.props.handleSubmitEditTodo(this.props.todo.id,this.state.title, this.state.description)
         .then(result => {
             if (result.error === null) {
                 this.props.closeEditModal()
@@ -51,7 +65,6 @@ class EditModal extends Component {
         const { error, errMessage } = this.state;
         return (
             <Modal
-                {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -91,4 +104,10 @@ class EditModal extends Component {
     }
 }
 
-export default connect()(EditModal);
+// export default connect()(EditModal);
+
+const connector = connect(null, { handleSubmitEditTodo });
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default connector(EditModal)

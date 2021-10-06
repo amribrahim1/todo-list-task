@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { handleSubmitNewTodo } from "../store";
 
-class AddTodo extends Component {
+interface AddTodoProps extends PropsFromRedux {
+    
+}
+
+interface AddTodoState {
+    title: string;
+    description: string;
+    error: boolean;
+    errMessage: string;
+}
+
+class AddTodo extends Component<AddTodoProps, AddTodoState> {
     state = {
         title: "",
         description: "",
@@ -10,24 +21,27 @@ class AddTodo extends Component {
         errMessage: ""
     }
 
-    handleOnChange = e => {
+    handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             [e.target.name]: e.target.value,
             errMessage: "",
             error: false
-        })
+        } as Pick<AddTodoState, keyof AddTodoState>)
     }
 
-    addTodo = e => {
+    addTodo = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         this.setState({
             errMessage: "",
             error: false
         })
-        this.props.dispatch(handleSubmitNewTodo(this.state.title, this.state.description))
+        this.props.handleSubmitNewTodo(this.state.title, this.state.description)
         .then(result => {
             if (result.error === null) {
-                this.setState({todo: ""})
+                this.setState({
+                    errMessage: "",
+                    error: false
+                })
             } else {
                 this.setState({
                     errMessage: result.error.message,
@@ -57,4 +71,10 @@ class AddTodo extends Component {
     }
 }
 
-export default connect()(AddTodo);
+// export default connect()(AddTodo);
+
+const connector = connect(null, { handleSubmitNewTodo });
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default connector(AddTodo)

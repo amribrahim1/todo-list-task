@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { handleSetAuthedUser } from './store';
 
 import Login from './components/Login';
-import Home from './components/Home';
+import Home from './components/Home.tsx';
 
 function Routes(props) {
     useEffect(() => {

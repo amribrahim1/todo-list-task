@@ -1,20 +1,39 @@
 import { Component } from "react";
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import EditModal from "./Modals/EditModal";
 import DeleteModal from "./Modals/DeleteModal";
-import { handleGetTodos } from "../store";
+import { handleGetTodos, RootState, store } from "../store";
+import { Todo } from '../models'
 
-class ListTodos extends Component {
+interface ListTodosProps extends PropsFromRedux {
+    
+}
+
+interface ListTodosState {
+    editModal: boolean;
+    deleteModal: boolean;
+    error: boolean;
+    errMessage: string;
+    todo: Todo;
+}
+
+class ListTodos extends Component<ListTodosProps, ListTodosState> {
+    emptyTodo = {
+        id: "",
+        title: "",
+        description: ""
+    }
+
     state = {
         editModal: false,
         deleteModal: false,
-        todo: {},
+        todo: this.emptyTodo,
         error: false,
         errMessage: ""
     }
 
     componentDidMount() {
-        this.props.dispatch(handleGetTodos())
+        this.props.handleGetTodos()
         .then(result => {
             if (result.error === null) {
                 
@@ -27,7 +46,7 @@ class ListTodos extends Component {
         })
     }
 
-    openEditModal = todo => {
+    openEditModal = (todo:Todo) => {
         this.setState({
             editModal: true,
             todo
@@ -36,11 +55,11 @@ class ListTodos extends Component {
     closeEditModal = () => {
         this.setState({
             editModal: false,
-            todo: {}
+            todo: this.emptyTodo
         })
     }
 
-    openDeleteModal = todo => {
+    openDeleteModal = (todo:Todo) => {
         this.setState({
             deleteModal: true,
             todo
@@ -49,19 +68,20 @@ class ListTodos extends Component {
     closeDeleteModal = () => {
         this.setState({
             deleteModal: false,
-            todo: {}
+            todo: this.emptyTodo
         })
     }
 
     render() {
         const { editModal, deleteModal, todo, error, errMessage } = this.state;
+        const todos = this.props.todos;
         return (
             <>
             <div className="alert alert-danger text-center m-4" role="alert" style={error ? {display: "block"} : {display: "none"}}>
                 {errMessage}
             </div>
             <ul className="list-group m-4 text-start">
-                {this.props.todos && this.props.todos.map(td => 
+                {todos && todos.map((td:Todo) => 
                     <li key={td.id} className="list-group-item d-flex align-items-center justify-content-between">
                         <p className="mb-0">
                             {td.title} <br/>
@@ -74,17 +94,23 @@ class ListTodos extends Component {
                     </li>
                 )}
             </ul>
-            <EditModal show={editModal} openEditModal={this.openEditModal} closeEditModal={this.closeEditModal} todo={todo} />
-            <DeleteModal show={deleteModal} openDeleteModal={this.openDeleteModal} closeDeleteModal={this.closeDeleteModal} todo={todo} />
+            <EditModal show={editModal} closeEditModal={this.closeEditModal} todo={todo} />
+            <DeleteModal show={deleteModal} closeDeleteModal={this.closeDeleteModal} todo={todo} />
            </>
         )
     }
 }
 
-function mapStateToProps ({ todos }) {
+function mapStateToProps ({ todos }: RootState) {
 	return {
 		todos
 	}
 }
 
-export default connect(mapStateToProps)(ListTodos);
+// export default connect(mapStateToProps)(ListTodos);
+
+const connector = connect(mapStateToProps, { handleGetTodos });
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default connector(ListTodos)

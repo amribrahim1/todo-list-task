@@ -45,7 +45,7 @@ export function handleSignIn (email:string,password:string) {
                 user: {uid: userCredential?.uid, email: userCredential?.email, displayName: userCredential?.displayName},
                 error: null
             });
-        } catch (error) {
+        } catch (error: any) {
             return dispatch({
                 type: ActionType.SET_AUTHED_USER,
                 user: null,
@@ -66,7 +66,7 @@ export function handleNewUser (email:string,password:string) {
                 user: {uid: userCredential?.uid, email: userCredential?.email, displayName: userCredential?.displayName},
                 error: null
             });
-        } catch (error) {
+        } catch (error: any) {
             return dispatch({
                 type: ActionType.SET_AUTHED_USER,
                 user: null,

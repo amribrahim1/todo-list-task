@@ -1,10 +1,22 @@
 import React , { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { connect, ConnectedProps } from 'react-redux';
 
 import { handleSignIn, handleNewUser } from '../store';
 
-class Login extends Component {
+interface LoginProps extends PropsFromRedux {
+    
+}
+
+interface LoginState {
+    loginEmail: string;
+    loginPass: string;
+    signupEmail: string;
+    signupPass: string;
+    error: boolean;
+    errMessage: string;
+}
+
+class Login extends Component<LoginProps, LoginState> {
     state = {
         loginEmail: "",
         loginPass: "",
@@ -15,21 +27,21 @@ class Login extends Component {
     }
 
 
-    handleOnChange = e => {
+    handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             [e.target.name]: e.target.value,
             errMessage: "",
             error: false
-        })
+        } as Pick<LoginState, keyof LoginState>)
     }
 
-    login = e => {
+    login = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         this.setState({
             errMessage: "",
             error: false
         })
-        this.props.dispatch(handleSignIn(this.state.loginEmail, this.state.loginPass))
+        this.props.handleSignIn(this.state.loginEmail, this.state.loginPass)
         .then(result => {
             if (result.error === null) {
 
@@ -42,13 +54,13 @@ class Login extends Component {
         })
     }
 
-    signup = e => {
+    signup = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         this.setState({
             errMessage: "",
             error: false
         })
-        this.props.dispatch(handleNewUser(this.state.signupEmail, this.state.signupPass))
+        this.props.handleNewUser(this.state.signupEmail, this.state.signupPass)
         .then(result => {
             if (result.error === null) {
 
@@ -123,10 +135,10 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps ({ authedUser, loadingBar }) {
-	return {
-		authedUser, loadingBar
-	}
-}
+// export default withRouter(connect(mapStateToProps)(Login));
 
-export default withRouter(connect(mapStateToProps)(Login));
+const connector = connect(null, { handleSignIn, handleNewUser });
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default connector(Login)
