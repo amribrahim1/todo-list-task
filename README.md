@@ -1,15 +1,14 @@
-This is a simple [React](https://reactjs.org) / [Redux] (https://redux.js.org) js application using [Firebase](https://firebase.google.com).
+This is a simple [React](https://reactjs.org) / [Redux](https://redux.js.org) js application using [Firebase](https://firebase.google.com) and [TypeScript](https://www.typescriptlang.org).
 
 ## Todo-list app.
 The user can create todo-list for him.
 
 ### Demo: https://todo-list-task-ca922.web.app
 
-It's my first React app in [TypeScript](https://www.typescriptlang.org),
-so it's very simple just intended to use TypeScript.
+**It's my first React app in [TypeScript](https://www.typescriptlang.org), so it's very simple, just intended to use TypeScript.**
 
 ### The app contains: 
-- Authorization system depends on [Firebase authentication](https://firebase.google.com/docs/auth): (login and register ).
+- Authorization system depends on [Firebase authentication](https://firebase.google.com/docs/auth): (login and register).
 - Todo list that user can edit/delete any of them.
 - Add todo to the list.
 - Todos are saved in [Firebase storage](https://firebase.google.com/docs/storage)
