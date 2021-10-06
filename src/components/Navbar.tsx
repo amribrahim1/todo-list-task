@@ -9,7 +9,7 @@ interface AddTodoProps extends PropsFromRedux {
 const Navbar: React.FC<AddTodoProps> = (props:AddTodoProps) => {
     const signOut = () => props.handleLogout();
     const authedUser = store.getState().authedUser
-    console.log(authedUser)
+    // console.log(authedUser)
     return (
         <nav className="navbar navbar-light bg-light">
             <div className="container-fluid">
