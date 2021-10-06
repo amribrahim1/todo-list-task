@@ -1,3 +1,80 @@
+This is a simple [React](https://reactjs.org) / [Redux] (https://redux.js.org) js application using [Firebase](https://firebase.google.com).
+
+## Todo-list app.
+The user can create todo-list for him.
+
+### Demo: https://todo-list-task-ca922.web.app
+
+It's my first React app in [TypeScript](https://www.typescriptlang.org),
+so it's very simple just intended to use TypeScript.
+
+### The app contains: 
+- Authorization system depends on [Firebase authentication](https://firebase.google.com/docs/auth): (login and register ).
+- Todo list that user can edit/delete any of them.
+- Add todo to the list.
+- Todos are saved in [Firebase storage](https://firebase.google.com/docs/storage)
+
+### The node moduled used:
+- [react](https://reactjs.org)
+- [redux](https://redux.js.org)
+- [react-redux](https://react-redux.js.org/)
+- [redux-thunk](https://github.com/reduxjs/redux-thunk) 
+- [typescript](https://www.typescriptlang.org) 
+- [firebase](https://firebase.google.com) 
+- [bootstrap](https://getbootstrap.com) 
+- [react-bootstrap](https://react-bootstrap.github.io) 
+
+### The app's files
+```
+├── build
+├── src
+│   ├── components
+|   |    ├── Modals
+│   │    │    ├── DeleteModal.tsx
+│   │    │    └── EditModal.tsx
+│   │    ├── AddTodo.tsx
+│   │    ├── ListTodos.tsx
+│   │    ├── Navbar.tsx
+│   │    └── user
+│   ├── models
+│   │    ├── Home.tsx
+│   │    └── Login.tsx
+│   ├── pages
+│   │    └── index.ts
+│   ├── store
+|   |    ├── actionCreators
+│   │    │    ├── authedUser.ts
+│   │    │    ├── todos.ts
+│   │    │    └── index.ts
+|   |    ├── actions
+│   │    │    └── index.ts
+|   |    ├── actionTypes
+│   │    │    └── index.ts
+|   |    ├── middleware
+│   │    │    ├── logger.ts
+│   │    │    └── index.ts
+|   |    ├── reducers
+│   │    │    ├── authedUser.ts
+│   │    │    ├── todos.ts
+│   │    │    └── index.ts
+|   |    ├── utils
+│   │    │    └── firebase.ts
+│   │    └── index.ts
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   ├── Routes.tsx
+│   └── setupTests.ts
+│   
+├── .gitignore
+├── tsconfig.json
+├── README.md
+└── package.json
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,27 +121,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

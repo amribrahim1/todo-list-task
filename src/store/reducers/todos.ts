@@ -1,4 +1,4 @@
-import { ActionType } from '../action-types';
+import { ActionType } from '../actionTypes';
 import { TodoAction } from '../actions'
 
 export default function todos (state : { id: string, title: string, description: string }[] = [], action: TodoAction) {

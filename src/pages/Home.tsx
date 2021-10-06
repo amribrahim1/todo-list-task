@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
-import AddTodo from "./AddTodo";
-import ListTodos from "./ListTodos";
+import Navbar from "../components/Navbar";
+import AddTodo from "../components/AddTodo";
+import ListTodos from "../components/ListTodos";
 
 const Home:React.FC = () => {
     return (

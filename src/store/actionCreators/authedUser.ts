@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import firebase from "firebase/app";
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { auth, signIn, signUp, logout } from '../utils/firebase';
-import { ActionType } from "../action-types";
+import { ActionType } from "../actionTypes";
 import { AuthedUserAction, LoadingAction } from "../actions";
 
 // function setAuthedUser (user, error=null) {

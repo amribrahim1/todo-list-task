@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { ActionType } from "../action-types";
+import { ActionType } from "../actionTypes";
 import { getTodos, addTodo, editTodo, deleteTodo } from "../utils/firebase";
 import { TodoAction } from "../actions";
 

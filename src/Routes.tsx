@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { LoadingBar } from 'react-redux-loading-bar'
 import { handleSetAuthedUser, RootState } from './store';
 
-import Login from './components/Login';
-import Home from './components/Home';
+import Login from './pages/Login';
+import Home from './pages/Home';
 
 interface ListTodosProps extends PropsFromRedux {
     

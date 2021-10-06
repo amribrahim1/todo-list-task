@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ActionType } from '../action-types';
+import { ActionType } from '../actionTypes';
 
 interface GetTodos {
     type: ActionType.GET_TODOS,

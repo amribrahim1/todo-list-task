@@ -1,4 +1,4 @@
-import { ActionType } from '../action-types';
+import { ActionType } from '../actionTypes';
 import { AuthedUserAction } from '../actions';
 
 export default function authedUser (state : { uid: string, email: string, displayName: string } | null = null, action: AuthedUserAction) {
