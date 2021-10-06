@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect, ConnectedProps } from 'react-redux';
 import EditModal from "./Modals/EditModal";
 import DeleteModal from "./Modals/DeleteModal";
-import { handleGetTodos, RootState, store } from "../store";
+import { handleGetTodos, RootState } from "../store";
 import { Todo } from '../models'
 
 interface ListTodosProps extends PropsFromRedux {

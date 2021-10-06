@@ -1,3 +1,4 @@
+import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { handleLogout, store } from '../store';
 
@@ -5,7 +6,7 @@ interface AddTodoProps extends PropsFromRedux {
     
 }
 
-const Navbar = (props:AddTodoProps) => {
+const Navbar: React.FC<AddTodoProps> = (props:AddTodoProps) => {
     const signOut = () => props.handleLogout();
     const authedUser = store.getState().authedUser
     console.log(authedUser)

@@ -1,5 +1,5 @@
 // External dependencies
-import { bindActionCreators, createStore } from 'redux';
+import { createStore } from 'redux';
 
 // internal imports
 import rootReducer from './reducers';
