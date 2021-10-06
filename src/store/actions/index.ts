@@ -1,3 +1,4 @@
+import { Action } from 'redux';
 import { ActionType } from '../action-types';
 
 interface GetTodos {
@@ -29,9 +30,7 @@ interface AuthUser {
     user: { uid: string | undefined, email: string | null | undefined, displayName: string | null | undefined } | null,
     error: any
 }
-interface ShowLoading {
-    scope?: string | undefined
-}
 
 export type TodoAction = GetTodos | AddTodo | DeleteTodo | EditTodo
 export type AuthedUserAction = AuthUser
+export type LoadingAction = Action

@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { auth, signIn, signUp, logout } from '../utils/firebase';
 import { ActionType } from "../action-types";
-import { AuthedUserAction } from "../actions";
+import { AuthedUserAction, LoadingAction } from "../actions";
 
 // function setAuthedUser (user, error=null) {
 //     return {
@@ -14,18 +14,18 @@ import { AuthedUserAction } from "../actions";
 // }
 
 export function handleSetAuthedUser () {
-    return (dispatch:Dispatch<AuthedUserAction>) => {
-        // dispatch(showLoading())
+    return (dispatch:Dispatch<AuthedUserAction | LoadingAction>) => {
+        dispatch(showLoading())
         return auth().onAuthStateChanged((user:firebase.User | null) => {
             if (user) {
-                // dispatch(hideLoading())
+                dispatch(hideLoading())
                 return dispatch({
                     type: ActionType.SET_AUTHED_USER,
                     user: {uid: user.uid, email: user.email, displayName: user.displayName},
                     error: null
                 })
             } else {
-                // dispatch(hideLoading())
+                dispatch(hideLoading())
                 return dispatch({
                     type: ActionType.SET_AUTHED_USER,
                     user,
